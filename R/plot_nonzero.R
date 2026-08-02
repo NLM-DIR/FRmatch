@@ -1,7 +1,7 @@
 
 #' Non-zero expression plot
 #'
-#' A function that calculates and plots "\% expressed per marker gene per cluster" for the \code{FRmatch} input data object.
+#' A function that calculates and plots "\% expressed per marker gene per cluster" for the input data object.
 #' \% = number of cells that express the marker gene in the cluster / cluster size.
 #'
 #' @param sce.object A \code{FRmatch} input data object. See example in \code{\link[FRmatch]{sce.example}}.

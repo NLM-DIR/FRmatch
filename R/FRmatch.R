@@ -8,9 +8,7 @@
 #' See details in \code{\link[FRmatch]{sce.example}}.
 #' @param sce.ref Data object of the \link[SingleCellExperiment]{SingleCellExperiment} class for reference experiment.
 #' See details in \code{\link[FRmatch]{sce.example}}.
-#' @param use.cosine Boolean variable indicating if to use cosine distance in \code(\link[FRmatch]{FR-test}}. Default: \code{TRUE}.
-# #' @param imputation INACTIVE. Boolean variable indicating if to impute expression zero values for the reference experiment. Default: \code{FALSE}.
-# #' See details in \code{\link[FRmatch]{impute_dropout}}.
+#' @param use.cosine Boolean variable indicating if to use cosine distance in \code{\link[FRmatch]{FR-test}}. Default: \code{TRUE}.
 #' @param filter.size,filter.fscore,filter.nomarker Filtering out small/poor-quality/no-marker clusters. Default: \code{filter.size=5}, filter based on the number
 #' of cells per cluster; \code{filter.fscore=NULL}, do not filter based on the F-beta score, otherwise specify a numeric value between 0 and 1;
 #' \code{filter.nomarker=FALSE}, filter based on the boolean variable indicating if to filter reference clusters with no marker genes available in query.
@@ -21,14 +19,14 @@
 #' @param numCores Number of cores for parallel computing. Default: \code{NULL}, use the maximum number of cores detected by \code{\link[parallel]{detectCores}}.
 #' Otherwise, specify by an integer value.
 #' @param prefix Prefix names for query and reference clusters. Default: \code{prefix=c("query.", "ref.")}.
-#' @param verbose Numeric value indicating levels of details to be printed. Default: \code{1}, only print major steps.
+#' @param verbose Numeric variable indicating levels of details to be printed. Default: \code{1}, only print major steps.
 #' If \code{0}, no verbose; if \code{2}, print all, including warnings.
 #' @param return.all Boolean variable indicating if to return all results (such as runs, etc.). Default: \code{FALSE}.
 #' @param ... Additional arguments passed to \code{\link[FRmatch]{FRtest}}, including \code{use.cosine}.
 #'
 #' @return A list of:
 #' \item{settings}{Record of customized parameter settings specified in the function.}
-#' \item{pmat}{A matrix of p-values. Rows are reference clusters, and columns are query clusters.}
+#' \item{pmat}{A matrix of raw p-values. Rows are reference clusters, and columns are query clusters.}
 #' \item{statmat}{A matrix of FR statistics. Rows are reference clusters, and columns are query clusters.}
 #' If \code{return.all = TRUE}, more intermediate results are returned.
 #'
@@ -47,7 +45,7 @@
 FRmatch <- function(sce.query, sce.ref, use.cosine=TRUE,  #imputation=FALSE,
                     filter.size=5, filter.fscore=NULL, filter.nomarker=FALSE, #filtering clusters
                     add.pseudo.marker=FALSE, pseudo.expr=1, #adding pseudo marker
-                    subsamp.size=20, subsamp.iter=1000, subsamp.seed=1, #subsampling
+                    subsamp.size=10, subsamp.iter=1000, subsamp.seed=1, #subsampling
                     numCores=NULL, prefix=c("query.", "ref."),
                     verbose=1, return.all=FALSE, ...){
 
@@ -86,11 +84,6 @@ FRmatch <- function(sce.query, sce.ref, use.cosine=TRUE,  #imputation=FALSE,
   sce.query <- filter_cluster(sce.query, filter.size=filter.size) #only filter on size, not fscore
   sce.ref <- filter_cluster(sce.ref, filter.size=filter.size, filter.fscore=filter.fscore)
 
-  ## imputation
-  # if(imputation){
-  #   sce.ref <- impute_zero(sce.ref)
-  #   cat("Imputation is applied. \n")
-  # }
 
   ## get expr data and dimension reduction by selecting common marker genes
   querydat.reduced <- logcounts(sce.query)[markergenes.common,]

@@ -42,3 +42,4 @@ vignettes/*.csv
 # R Environment Variables
 .Renviron
 .Rproj.user
+.positai

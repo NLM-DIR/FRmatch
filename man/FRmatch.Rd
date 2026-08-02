@@ -13,7 +13,7 @@ FRmatch(
   filter.nomarker = FALSE,
   add.pseudo.marker = FALSE,
   pseudo.expr = 1,
-  subsamp.size = 20,
+  subsamp.size = 10,
   subsamp.iter = 1000,
   subsamp.seed = 1,
   numCores = NULL,
@@ -30,6 +30,8 @@ See details in \code{\link[FRmatch]{sce.example}}.}
 \item{sce.ref}{Data object of the \link[SingleCellExperiment]{SingleCellExperiment} class for reference experiment.
 See details in \code{\link[FRmatch]{sce.example}}.}
 
+\item{use.cosine}{Boolean variable indicating if to use cosine distance in \code{\link[FRmatch]{FR-test}}. Default: \code{TRUE}.}
+
 \item{filter.size, filter.fscore, filter.nomarker}{Filtering out small/poor-quality/no-marker clusters. Default: \code{filter.size=5}, filter based on the number
 of cells per cluster; \code{filter.fscore=NULL}, do not filter based on the F-beta score, otherwise specify a numeric value between 0 and 1;
 \code{filter.nomarker=FALSE}, filter based on the boolean variable indicating if to filter reference clusters with no marker genes available in query.}
@@ -45,7 +47,7 @@ Otherwise, specify by an integer value.}
 
 \item{prefix}{Prefix names for query and reference clusters. Default: \code{prefix=c("query.", "ref.")}.}
 
-\item{verbose}{Numeric value indicating levels of details to be printed. Default: \code{1}, only print major steps.
+\item{verbose}{Numeric variable indicating levels of details to be printed. Default: \code{1}, only print major steps.
 If \code{0}, no verbose; if \code{2}, print all, including warnings.}
 
 \item{return.all}{Boolean variable indicating if to return all results (such as runs, etc.). Default: \code{FALSE}.}
@@ -55,7 +57,7 @@ If \code{0}, no verbose; if \code{2}, print all, including warnings.}
 \value{
 A list of:
 \item{settings}{Record of customized parameter settings specified in the function.}
-\item{pmat}{A matrix of p-values. Rows are reference clusters, and columns are query clusters.}
+\item{pmat}{A matrix of raw p-values. Rows are reference clusters, and columns are query clusters.}
 \item{statmat}{A matrix of FR statistics. Rows are reference clusters, and columns are query clusters.}
 If \code{return.all = TRUE}, more intermediate results are returned.
 }

@@ -32,6 +32,8 @@ See details in \code{\link[FRmatch]{sce.example}}.}
 \item{sce.ref}{Data object of the \link[SingleCellExperiment]{SingleCellExperiment} class for reference experiment.
 See details in \code{\link[FRmatch]{sce.example}}.}
 
+\item{use.cosine}{Boolean variable indicating if to use cosine distance in \code{\link[FRmatch]{FR-test}}. Default: \code{TRUE}.}
+
 \item{feature.selection}{Which set of features to use for the matching space? Default: \code{feature.selection="reference.markers"}, use reference marker genes.
 If \code{feature.selection="query.genes"}, use all query genes as the feature space, e.g. the query genes are probe genes for spatial transcriptomics experiment.}
 
@@ -63,13 +65,13 @@ If \code{0}, no verbose; if \code{2}, print all, including warnings.}
 \value{
 A list of:
 \item{settings}{Record of customized parameter settings specified in the function.}
-\item{pmat}{A cell-by-cluster (a.k.a. query cell by reference cluster) matrix of p-values retained from the iterative procedure.}
+\item{pmat}{A cell-by-cluster (a.k.a. query cell by reference cluster) matrix of raw p-values.}
 \item{cell2cluster}{A data frame of cell-to-cluster matches summarized from the \code{pmat}.}
 Columns in \code{cell2cluster} are:
 \item{query.cell}{Query cell ID.}
-\item{query.cluster}{Cluster membership of query cells.}
+\item{query.cluster}{Original cluster of query cell.}
 \item{match}{Matched reference cluster for the query cell.}
-\item{score}{Confidence score of \code{match.cell2cluster}, which is the maximum value of the corresponding row in \code{pmat}.}
+\item{score}{Confidence score for \code{match}, which is the maximum value of the corresponding query cell row in \code{pmat}.}
 }
 \description{
 This is a user-end wrapper function that implements the steps of cell type matching between two single cell RNA-seq experiments

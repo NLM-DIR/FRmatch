@@ -27,7 +27,7 @@ plot_nonzero(
 if \code{return.value = TRUE}, a matrix of plotted values.
 }
 \description{
-A function that calculates and plots "\% expressed per marker gene per cluster" for the \code{FRmatch} input data object.
+A function that calculates and plots "\% expressed per marker gene per cluster" for the input data object.
 \% = number of cells that express the marker gene in the cluster / cluster size.
 }
 \examples{

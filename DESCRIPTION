@@ -1,23 +1,19 @@
 Package: FRmatch
 Title: Cell type matching in single-cell RNA-sequencing data using FR-Match
-Version: 2.26.2
+Version: 2.1
 Authors@R: c(
     person(given = "Yun",
            family = "Zhang",
            role = c("aut", "cre"),
-           email = "zhangy@jcvi.org"),
-    person(given = "Richard",
-           family = "Scheuermann",
-           role = c("ctb"),
-           email = "RScheuermann@jcvi.org")
+           email = "yun.zhang@nih.gov")
     )
-Description: FR-Match is a cell type cluster mapping algorithm for single cell RNA-sequencing (scRNA-seq) data. The core method is based on a statistical test called Friedman-Rafsky (FR) test, which is a multivariate non-parametric test. This package implements the core algorithms and companion visualization tools for the method.
-Depends: R (>= 4.0.0), shiny (>= 1.2.0), SingleCellExperiment, pbmcapply
+Description: A cell type matching algorithm for single cell RNA-sequencing (scRNA-seq) data.
+Depends: R (>= 4.0.0), SingleCellExperiment, pbmcapply
 Imports: methods, S4Vectors, SummarizedExperiment, lsa, igraph, ade4, tibble, dplyr, tidyr, forcats, magrittr, pheatmap, RColorBrewer, ggplot2, gridExtra, viridis
 Suggests: 
     knitr,
     rmarkdown
-License: MIT + file LICENSE
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

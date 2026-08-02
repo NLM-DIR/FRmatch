@@ -2,56 +2,55 @@
 
 <img src="FRmatch-sticker-2.png" width="110" height="125">
 
-## Getting Started
+__Citation:__ Hu et al. (2026) *bioRxiv* https://pmc.ncbi.nlm.nih.gov/articles/PMC12190912/
 
-### Prerequisites
+__*To contribute, please open an [issue](https://github.com/NLM-DIR/FRmatch/issues) on this Github repository.*__
 
-* R, Shiny
-* Data class: [Bioconductor-SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)
-* Feature selection: [JCVenterInstitute/NSForest](https://github.com/JCVenterInstitute/NSForest)
+## Prerequisites
 
-### Installation
+* R
+* S4 class data object: [Bioconductor SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)
+* Feature selection: [NS-Forest](https://github.com/NLM-DIR/NSForest)
+
+## Installation
 
 ```R
 install.packages("devtools")
-devtools::install_github("JCVenterInstitute/FRmatch")
+devtools::install_github("NLM-DIR/FRmatch")
 ```
 
-### Tutorial
+## Tutorial
 
 To start with a [tutorial](https://jcventerinstitute.github.io/celligrate/tutorials/FRmatch-vignette.html).
 
-### Shiny App
 
-To start with a demo Shiny App:
+## Versions
 
-```R
-FRmatch::runShiny()
-```
+Earlier versions are managed in [Releases](https://github.com/NLM-DIR/FRmatch/releases).
 
-## Versioning
+Version 2.0:
 
-Stable releases are managed in [Releases](https://github.com/JCVenterInstitute/FRmatch/releases).
+Zhang et al. (2022) Cell type matching in single-cell RNA-sequencing data using FR-Match. __*Scientific Reports.*__ https://doi.org/10.1038/s41598-022-14192-z
 
-Please report issues using the [issue traker](https://github.com/JCVenterInstitute/FRmatch/issues).
+Version 1.0:
 
-## Citations
-
-Zhang et al. 2022. Cell type matching in single-cell RNA-sequencing data using FR-Match. *Scientific Reports*, [https://doi.org/10.1038/s41598-022-14192-z](https://doi.org/10.1038/s41598-022-14192-z).
-
-Zhang et al. 2020. FR-Match: robust matching of cell type clusters from single cell RNA sequencing data using the Friedman–Rafsky non-parametric test. *Briefings in Bioinformatics*, [https://doi.org/10.1093/bib/bbaa339](https://doi.org/10.1093/bib/bbaa339).
+Zhang et al. (2020) FR-Match: robust matching of cell type clusters from single cell RNA sequencing data using the Friedman–Rafsky non-parametric test. __*Briefings in Bioinformatics.*__ https://doi.org/10.1093/bib/bbaa339
 
 ## Authors
 
-* Yun (Renee) Zhang, @yunzhang813 (https://github.com/yunzhang813)
-* Richard Scheuermann, @scheuerm (https://github.com/scheuerm)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+* Beverly Peng (bpeng@jcvi.org)
+* Brian Aevermann (baevermann@chanzuckerberg.com)
+* Richard Scheuermann (richard.scheuermann@nih.gov)
+* Yun (Renee) Zhang (yun.zhang@nih.gov)
 
 ## Acknowledgments
 
-* Allen Institute for Brain Science
-* Chan Zuckerberg Initiative (DAF 2018–182730)
-* The NIH BRAIN Initiative (1RF1MH123220)
+* Division of Intramural Research, National Library of Medicine
+  
+Our collaborators:
+* Allen Institute of Brain Science
+* Brain Initiative Cell Census Network
+* Chan Zuckerberg Initiative
+* California Institute for Regenerative Medicine
+* J. Craig Venter Institute
+

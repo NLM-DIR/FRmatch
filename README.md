@@ -1,6 +1,6 @@
 # FR-Match
 
-<img src="vignettes/FRmatch-sticker-2.png" width="110" height="125">
+<img src="FRmatch-sticker-2.png" width="110" height="125">
 
 ## Getting Started
 

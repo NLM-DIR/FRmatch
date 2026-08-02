@@ -1,6 +1,6 @@
-# FR-Match v2.1
-
 <img src="FRmatch-sticker-2.png" width="110" height="125">
+
+# FR-Match v2.1
 
 __Citation:__ Hu et al. (2026) *bioRxiv* https://pmc.ncbi.nlm.nih.gov/articles/PMC12190912/
 

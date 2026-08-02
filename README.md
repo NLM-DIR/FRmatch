@@ -1,4 +1,4 @@
-# FR-Match
+# FR-Match v2.1
 
 <img src="FRmatch-sticker-2.png" width="110" height="125">
 

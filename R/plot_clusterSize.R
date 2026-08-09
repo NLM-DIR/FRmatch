@@ -33,7 +33,8 @@ plot_clusterSize <- function(sce.E1, sce.E2, decreasing=TRUE,
     scale_x_discrete(limits = names(tab.E1)) +
     theme_bw() +
     theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1)) +
-    geom_text(aes(label=Size), angle=30, vjust=0, size=2.5, position=position_dodge(0.9)) +
+    geom_text(aes(label=Size), angle=45, vjust=-0.1, hjust=-0.1, size=2.5, position=position_dodge(0.9)) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
     ggtitle(paste0(name.E1, " (", length(tab.E1)," clusters, ",sum(tab.E1)," cells)"))
 
   df.E2 <- tibble(Cluster=names(tab.E2), Size=as.vector(tab.E2))
@@ -42,7 +43,8 @@ plot_clusterSize <- function(sce.E1, sce.E2, decreasing=TRUE,
     scale_x_discrete(limits = names(tab.E2)) +
     theme_bw() +
     theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1)) +
-    geom_text(aes(label=Size), angle=30, vjust=0, size=2.5, position=position_dodge(0.9)) +
+    geom_text(aes(label=Size), angle=45, vjust=-0.1, hjust=-0.1, size=2.5, position=position_dodge(0.9)) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
     ggtitle(paste0(name.E2, " (", length(tab.E2)," clusters, ",sum(tab.E2)," cells)"))
 
   g <- grid.arrange(g.E1, g.E2)

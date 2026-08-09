@@ -16,7 +16,6 @@
 #' @export
 
 plot_clusterSize <- function(sce.E1, sce.E2, decreasing=TRUE,
-                             # filter.size=10,
                              name.E1="E1", name.E2="E2", col.E1="#F0E442", col.E2="#56B4E9",
                              filename=NA, width=NULL, height=10){
   ## cluster sizes
@@ -33,9 +32,8 @@ plot_clusterSize <- function(sce.E1, sce.E2, decreasing=TRUE,
     geom_bar(stat="identity", position=position_dodge(), fill=col.E1) +
     scale_x_discrete(limits = names(tab.E1)) +
     theme_bw() +
-    theme(axis.text.x = element_text(angle=90, hjust=1)) +
-    geom_text(aes(label=Size), vjust=-0.3, size=2.5, position=position_dodge(0.9)) +
-    # geom_hline(yintercept=filter.size, linetype="dashed", color="red") +
+    theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1)) +
+    geom_text(aes(label=Size), angle=30, vjust=-0.3, size=2.5, position=position_dodge(0.9)) +
     ggtitle(paste0(name.E1, " (", length(tab.E1)," clusters, ",sum(tab.E1)," cells)"))
 
   df.E2 <- tibble(Cluster=names(tab.E2), Size=as.vector(tab.E2))
@@ -43,9 +41,8 @@ plot_clusterSize <- function(sce.E1, sce.E2, decreasing=TRUE,
     geom_bar(stat="identity", position=position_dodge(), fill=col.E2) +
     scale_x_discrete(limits = names(tab.E2)) +
     theme_bw() +
-    theme(axis.text.x = element_text(angle=90, hjust=1)) +
-    geom_text(aes(label=Size), vjust=-0.3, size=2.5, position=position_dodge(0.9)) +
-    # geom_hline(yintercept=filter.size, linetype="dashed", color="red") +
+    theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1)) +
+    geom_text(aes(label=Size), angle=30, vjust=-0.3, size=2.5, position=position_dodge(0.9)) +
     ggtitle(paste0(name.E2, " (", length(tab.E2)," clusters, ",sum(tab.E2)," cells)"))
 
   g <- grid.arrange(g.E1, g.E2)

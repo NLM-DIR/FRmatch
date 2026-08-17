@@ -13,7 +13,7 @@
 #' @param reorder See \code{\link[FRmatch]{plot_FRmatch}}.
 #' @param two.way.only Boolean variable indicating if to plot two-way matches only. Default: \code{FALSE}.
 #' @param return.value Boolean variable indicating if to return the plotted values. Default: \code{FALSE}.
-#' @param cellwidth,cellheight,main,filename,... Plotting parameters passed to \code{\link[pheatmap]{pheatmap}}.
+#' @param main,filename,... Plotting parameters passed to \code{\link[pheatmap]{pheatmap}}.
 #'
 #' @return If \code{return.value = TRUE}, a matrix of two-way matching values 2 = two-way match, 1 = one-way match, and 0 = no match.
 #'
@@ -28,7 +28,7 @@ plot_bi_FRmatch <- function(rst.FRmatch.E1toE2, rst.FRmatch.E2toE1,
                             prefix=c("query.","ref."), name.E1="E1.", name.E2="E2.",
                             p.adj.method="BY", sig.level=0.05, refine=TRUE,
                             reorder=TRUE, two.way.only=FALSE, return.value=FALSE,
-                            cellwidth=10, cellheight=10, main=NULL, filename=NA, ...){
+                            main=NULL, filename=NA, ...){
 
   ## get binary matrices for plotting
   pmat.cutoff.E1toE2 <- cutoff.FRmatch(rst.FRmatch.E1toE2$pmat, p.adj.method=p.adj.method, sig.level=sig.level, refine=refine)
@@ -57,7 +57,7 @@ plot_bi_FRmatch <- function(rst.FRmatch.E1toE2, rst.FRmatch.E2toE1,
              legend_labels=c("No match", "Two-way match"),
              cluster_rows=F, cluster_cols=F,
              gaps_row=nrow(mat.bi)-1,
-             cellwidth=cellwidth, cellheight=cellheight,
+             cellwidth=10, cellheight=10,
              main=main,
              filename=filename,
              ...)
@@ -68,7 +68,7 @@ plot_bi_FRmatch <- function(rst.FRmatch.E1toE2, rst.FRmatch.E2toE1,
              legend_breaks=0:2, legend_labels=c("No match", "One-way match", "Two-way match"),
              cluster_rows=F, cluster_cols=F,
              gaps_row=nrow(mat.bi)-1,
-             cellwidth=cellwidth, cellheight=cellheight,
+             cellwidth=10, cellheight=10,
              main=main,
              filename=filename,
              ...)

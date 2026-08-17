@@ -18,7 +18,7 @@
 #' in the \code{type="matches"} plot. Default: \code{FALSE}. If \code{TRUE}, number of ignored columns reported in the unassigned row.
 #' @param return.value Boolean variable indicating if to return the plotted values. Default: \code{FALSE}.
 #' @param main Plot title.
-#' @param cellwidth,cellheight,filename,... Plotting parameters passed to \code{\link[pheatmat]{pheatmap}}.
+#' @param filename File name for saving plot.
 #'
 #' @return If \code{return.value = TRUE}, a matrix of one-way matching values 1 = match, and 0 = no match, or a matrix of adjusted p-values.
 #'
@@ -31,7 +31,7 @@
 plot_FRmatch <- function(rst.FRmatch, type="matches",
                          p.adj.method="BY", sig.level=0.05, refine=TRUE,
                          reorder=TRUE, ignore.unassigned=FALSE, return.value=FALSE,
-                         main=NULL, cellwidth=10, cellheight=10, filename=NA, ...){
+                         main=NULL, filename=NA){
   ## calculate adjusted p-values and determine matches
   pmat.adj <- padj.FRmatch(rst.FRmatch$pmat, p.adj.method=p.adj.method)
   pmat.cutoff <- cutoff.FRmatch(rst.FRmatch$pmat, p.adj.method=p.adj.method, sig.level=sig.level, refine=refine)
@@ -57,10 +57,9 @@ plot_FRmatch <- function(rst.FRmatch, type="matches",
              legend_breaks=c(0,1), legend_labels=c("No match", "Match"),
              cluster_rows=F, cluster_cols=F,
              gaps_row=nrow(pmat.cutoff)-1,
-             cellwidth=cellwidth, cellheight=cellheight,
+             cellwidth=10, cellheight=10,
              main=main,
-             filename=filename,
-             ...)
+             filename=filename)
     ## output
     if(return.value) return(pmat.cutoff)
   }
@@ -85,7 +84,7 @@ plot_FRmatch <- function(rst.FRmatch, type="matches",
       xlab("Query cluster") + ylab("Adjusted p-value") + ggtitle(main)
     ## save plot
     if(!is.na(filename)){
-      ggsave(filename, g, width=ncol(pmat.adj)*.2, height=5.5)
+      ggsave(filename, g, width=ncol(pmat.adj)*.2+.5, height=5.5)
     }
     else plot(g)
     ## output

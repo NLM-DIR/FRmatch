@@ -14,10 +14,7 @@ plot_FRmatch(
   ignore.unassigned = FALSE,
   return.value = FALSE,
   main = NULL,
-  cellwidth = 10,
-  cellheight = 10,
-  filename = NA,
-  ...
+  filename = NA
 )
 }
 \arguments{
@@ -45,7 +42,7 @@ in the \code{type="matches"} plot. Default: \code{FALSE}. If \code{TRUE}, number
 
 \item{main}{Plot title.}
 
-\item{cellwidth, cellheight, filename, ...}{Plotting parameters passed to \code{\link[pheatmat]{pheatmap}}.}
+\item{filename}{File name for saving plot.}
 }
 \value{
 If \code{return.value = TRUE}, a matrix of one-way matching values 1 = match, and 0 = no match, or a matrix of adjusted p-values.

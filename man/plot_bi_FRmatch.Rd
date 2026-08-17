@@ -16,8 +16,6 @@ plot_bi_FRmatch(
   reorder = TRUE,
   two.way.only = FALSE,
   return.value = FALSE,
-  cellwidth = 10,
-  cellheight = 10,
   main = NULL,
   filename = NA,
   ...
@@ -42,7 +40,7 @@ plot_bi_FRmatch(
 
 \item{return.value}{Boolean variable indicating if to return the plotted values. Default: \code{FALSE}.}
 
-\item{cellwidth, cellheight, main, filename, ...}{Plotting parameters passed to \code{\link[pheatmap]{pheatmap}}.}
+\item{main, filename, ...}{Plotting parameters passed to \code{\link[pheatmap]{pheatmap}}.}
 }
 \value{
 If \code{return.value = TRUE}, a matrix of two-way matching values 2 = two-way match, 1 = one-way match, and 0 = no match.

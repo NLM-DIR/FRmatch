@@ -10,7 +10,7 @@
 #' For more options, please see \code{\link[stats]{p.adjust.methods}}.
 #' @param sig.level Numeric variable that specifies the significance level of adjusted p-value. A MATCH is >\code{sig.level}.
 #' Default: \code{0.05}.
-#' @param refine Boolean variable. Default: \code{TRUE}. If \code{TRUE}, matches are refined based on \eqn{\delta > 0.2},
+#' @param refine Boolean variable. Default: \code{TRUE}. If \code{TRUE}, matches are refined based on \eqn{\delta > 0.1},
 #' where \eqn{\delta} is the difference between the maximum \code{padj} and other non-significant (i.e. > \code{sig.level}) \code{padj} for each query cluster.
 #' @param reorder Boolean variable indicating if to reorder the columns so that matches are aligned along the diagonal.
 #' It improves the interpretability of the one-way match plot. Default: \code{TRUE}.
@@ -118,7 +118,7 @@ cutoff.FRmatch <- function(pmat, p.adj.method, sig.level, refine){
   if(refine){
     temp <- pmat.adj*out
     temp.delta <- sweep(temp, 2, colMaxs(temp), FUN = "-")
-    out.refine <- out*matrix(as.numeric(temp.delta>=-0.2), nrow=nrow(out))
+    out.refine <- out*matrix(as.numeric(temp.delta > -0.1), nrow=nrow(out))
   }
   else
     out.refine <- out

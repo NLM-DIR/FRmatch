@@ -9,6 +9,7 @@
 #' @param name.E1,name.E2 Customized names with delimiter for E1 and E2 to be used in this figure. Default: \code{"E1."} and \code{"E2."}, respectively.
 #' @param p.adj.method See \code{\link[FRmatch]{plot_FRmatch}}.
 #' @param sig.level See \code{\link[FRmatch]{plot_FRmatch}}.
+#' @param refine See \code{\link[FRmatch]{plot_FRmatch}}.
 #' @param reorder See \code{\link[FRmatch]{plot_FRmatch}}.
 #' @param two.way.only Boolean variable indicating if to plot two-way matches only. Default: \code{FALSE}.
 #' @param return.value Boolean variable indicating if to return the plotted values. Default: \code{FALSE}.
@@ -25,13 +26,13 @@
 
 plot_bi_FRmatch <- function(rst.FRmatch.E1toE2, rst.FRmatch.E2toE1,
                             prefix=c("query.","ref."), name.E1="E1.", name.E2="E2.",
-                            p.adj.method="BY", sig.level=0.05,
+                            p.adj.method="BY", sig.level=0.05, refine=TRUE,
                             reorder=TRUE, two.way.only=FALSE, return.value=FALSE,
                             cellwidth=10, cellheight=10, main=NULL, filename=NA, ...){
 
   ## get binary matrices for plotting
-  pmat.cutoff.E1toE2 <- cutoff.FRmatch(rst.FRmatch.E1toE2$pmat, p.adj.method=p.adj.method, sig.level=sig.level)
-  pmat.cutoff.E2toE1 <- cutoff.FRmatch(rst.FRmatch.E2toE1$pmat, p.adj.method=p.adj.method, sig.level=sig.level)
+  pmat.cutoff.E1toE2 <- cutoff.FRmatch(rst.FRmatch.E1toE2$pmat, p.adj.method=p.adj.method, sig.level=sig.level, refine=refine)
+  pmat.cutoff.E2toE1 <- cutoff.FRmatch(rst.FRmatch.E2toE1$pmat, p.adj.method=p.adj.method, sig.level=sig.level, refine=refine)
 
   ## combine two matrices to one two-way matrix
   mat1 <- pmat.cutoff.E1toE2[-nrow(pmat.cutoff.E1toE2),] #use E1toE2 as the framework for final plot

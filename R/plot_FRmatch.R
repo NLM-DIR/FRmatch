@@ -10,6 +10,8 @@
 #' For more options, please see \code{\link[stats]{p.adjust.methods}}.
 #' @param sig.level Numeric variable that specifies the significance level of adjusted p-value. A MATCH is >\code{sig.level}.
 #' Default: \code{0.05}.
+#' @param refine Boolean variable. Default: \code{TRUE}. If \code{TRUE}, matches are refined based on \eqn{\delta > 0.2},
+#' where \eqn{\delta} is the difference between the maximum \code{padj} and other non-significant (i.e. > \code{sig.level}) \code{padj} for each query cluster.
 #' @param reorder Boolean variable indicating if to reorder the columns so that matches are aligned along the diagonal.
 #' It improves the interpretability of the one-way match plot. Default: \code{TRUE}.
 #' @param ignore.unassigned Boolean variable indicating if to skip the columns of unassigned query clusters
@@ -26,12 +28,13 @@
 #'
 #' @export
 
-plot_FRmatch <- function(rst.FRmatch, type="matches", p.adj.method="BY", sig.level=0.05,
+plot_FRmatch <- function(rst.FRmatch, type="matches",
+                         p.adj.method="BY", sig.level=0.05, refine=TRUE,
                          reorder=TRUE, ignore.unassigned=FALSE, return.value=FALSE,
                          main=NULL, cellwidth=10, cellheight=10, filename=NA, ...){
   ## calculate adjusted p-values and determine matches
   pmat.adj <- padj.FRmatch(rst.FRmatch$pmat, p.adj.method=p.adj.method)
-  pmat.cutoff <- cutoff.FRmatch(rst.FRmatch$pmat, p.adj.method=p.adj.method, sig.level=sig.level)
+  pmat.cutoff <- cutoff.FRmatch(rst.FRmatch$pmat, p.adj.method=p.adj.method, sig.level=sig.level, refine=refine)
 
   ## reorder
   if(reorder){
@@ -64,13 +67,17 @@ plot_FRmatch <- function(rst.FRmatch, type="matches", p.adj.method="BY", sig.lev
 
   ## plot: adjusted p-values boxplot
   if(type=="padj"){
-    df <- tibble(padj=as.vector(pmat.adj),
-                 query.cluster = rep(colnames(pmat.adj), each=nrow(pmat.adj))) %>%
-      mutate(query.cluster = fct_relevel(query.cluster, colnames(pmat.adj)))
+    df <- tibble(padj = as.vector(pmat.adj),
+                 query.cluster = rep(colnames(pmat.adj), each=nrow(pmat.adj)),
+                 match = as.vector(pmat.cutoff[-nrow(pmat.cutoff),])) %>%
+      mutate(query.cluster = fct_relevel(query.cluster, colnames(pmat.adj))) %>%
+      mutate(match = as.factor(match))
     ## plot
     if(is.null(main)) main <- "Adjusted p-value"
     g <- ggplot(df, aes(x=query.cluster, y=padj)) +
       geom_boxplot() +
+      geom_point(aes(color = match)) + # Colors points by group
+      scale_color_manual(values = c("black", "red")) +
       theme_bw() +
       theme(axis.text.x = element_text(angle = 270, hjust = 0, vjust = 0.5)) +
       geom_hline(linetype = "dashed", yintercept = sig.level, color = "red") +
@@ -96,13 +103,30 @@ plot_FRmatch <- function(rst.FRmatch, type="matches", p.adj.method="BY", sig.lev
 ## This function determines matches by cutting off the p-values from FRmatch, and
 ## adds the "unassigned" row in the bottom
 
-cutoff.FRmatch <- function(pmat, p.adj.method, sig.level){
+# cutoff.FRmatch <- function(pmat, p.adj.method, sig.level){
+#   pmat.adj <- padj.FRmatch(pmat=pmat, p.adj.method=p.adj.method)
+#   out <- matrix(as.numeric(pmat.adj>=sig.level), nrow=nrow(pmat.adj))
+#   out <- rbind(out, as.numeric(colSums(out)==0))
+#   colnames(out) <- colnames(pmat)
+#   rownames(out) <- c(rownames(pmat), "unassigned")
+#   return(out)
+# }
+
+cutoff.FRmatch <- function(pmat, p.adj.method, sig.level, refine){
   pmat.adj <- padj.FRmatch(pmat=pmat, p.adj.method=p.adj.method)
   out <- matrix(as.numeric(pmat.adj>=sig.level), nrow=nrow(pmat.adj))
-  out <- rbind(out, as.numeric(colSums(out)==0))
-  colnames(out) <- colnames(pmat)
-  rownames(out) <- c(rownames(pmat), "unassigned")
-  return(out)
+  if(refine){
+    temp <- pmat.adj*out
+    temp.delta <- sweep(temp, 2, colMaxs(temp), FUN = "-")
+    out.refine <- out*matrix(as.numeric(temp.delta>=-0.2), nrow=nrow(out))
+  }
+  else
+    out.refine <- out
+
+  out.refine <- rbind(out.refine, as.numeric(colSums(out.refine)==0))
+  colnames(out.refine) <- colnames(pmat)
+  rownames(out.refine) <- c(rownames(pmat), "unassigned")
+  return(out.refine)
 }
 
 padj.FRmatch <- function(pmat, p.adj.method){

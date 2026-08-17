@@ -9,6 +9,7 @@ plot_FRmatch(
   type = "matches",
   p.adj.method = "BY",
   sig.level = 0.05,
+  refine = TRUE,
   reorder = TRUE,
   ignore.unassigned = FALSE,
   return.value = FALSE,
@@ -30,6 +31,9 @@ For more options, please see \code{\link[stats]{p.adjust.methods}}.}
 
 \item{sig.level}{Numeric variable that specifies the significance level of adjusted p-value. A MATCH is >\code{sig.level}.
 Default: \code{0.05}.}
+
+\item{refine}{Boolean variable. Default: \code{TRUE}. If \code{TRUE}, matches are refined based on \eqn{\delta > 0.2},
+where \eqn{\delta} is the difference between the maximum \code{padj} and other non-significant (i.e. > \code{sig.level}) \code{padj} for each query cluster.}
 
 \item{reorder}{Boolean variable indicating if to reorder the columns so that matches are aligned along the diagonal.
 It improves the interpretability of the one-way match plot. Default: \code{TRUE}.}

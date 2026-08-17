@@ -12,6 +12,7 @@ plot_bi_FRmatch(
   name.E2 = "E2.",
   p.adj.method = "BY",
   sig.level = 0.05,
+  refine = TRUE,
   reorder = TRUE,
   two.way.only = FALSE,
   return.value = FALSE,
@@ -32,6 +33,8 @@ plot_bi_FRmatch(
 \item{p.adj.method}{See \code{\link[FRmatch]{plot_FRmatch}}.}
 
 \item{sig.level}{See \code{\link[FRmatch]{plot_FRmatch}}.}
+
+\item{refine}{See \code{\link[FRmatch]{plot_FRmatch}}.}
 
 \item{reorder}{See \code{\link[FRmatch]{plot_FRmatch}}.}
 
